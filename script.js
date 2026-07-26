@@ -14,6 +14,7 @@ id:1,
 title:"No Poverty",
 description:"Mengakhiri kemiskinan dalam segala bentuk.",
 color:"#E5243B"
+icon: "images/01.png"
 },
 
 {
@@ -21,6 +22,7 @@ id:2,
 title:"Zero Hunger",
 description:"Mengakhiri kelaparan dan meningkatkan gizi.",
 color:"#DDA63A"
+icon: "images/02.png"
 },
 
 {
@@ -28,6 +30,7 @@ id:3,
 title:"Good Health",
 description:"Kehidupan sehat dan sejahtera.",
 color:"#4C9F38"
+icon: "images/03.png"
 },
 
 {
@@ -35,6 +38,7 @@ id:4,
 title:"Quality Education",
 description:"Pendidikan berkualitas untuk semua.",
 color:"#C5192D"
+icon: "images/04.png"
 },
 
 {
@@ -42,6 +46,7 @@ id:5,
 title:"Gender Equality",
 description:"Kesetaraan gender.",
 color:"#FF3A21"
+icon: "images/05.png"
 },
 
 {
@@ -49,6 +54,7 @@ id:6,
 title:"Clean Water",
 description:"Air bersih dan sanitasi.",
 color:"#26BDE2"
+icon: "images/06.png"
 },
 
 {
@@ -56,6 +62,7 @@ id:7,
 title:"Clean Energy",
 description:"Energi bersih dan terjangkau.",
 color:"#FCC30B"
+icon: "images/07.png"
 },
 
 {
@@ -63,6 +70,7 @@ id:8,
 title:"Decent Work",
 description:"Pekerjaan layak dan pertumbuhan ekonomi.",
 color:"#A21942"
+icon: "images/08.png"
 },
 
 {
@@ -70,6 +78,7 @@ id:9,
 title:"Industry Innovation",
 description:"Inovasi dan infrastruktur.",
 color:"#FD6925"
+icon: "images/09.png"
 },
 
 {
@@ -77,6 +86,7 @@ id:10,
 title:"Reduced Inequalities",
 description:"Mengurangi kesenjangan.",
 color:"#DD1367"
+icon: "images/10.png"
 },
 
 {
@@ -84,6 +94,7 @@ id:11,
 title:"Sustainable Cities",
 description:"Kota dan komunitas berkelanjutan.",
 color:"#FD9D24"
+icon: "images/11.png"
 },
 
 {
@@ -91,6 +102,7 @@ id:12,
 title:"Responsible Consumption",
 description:"Konsumsi dan produksi bertanggung jawab.",
 color:"#BF8B2E"
+icon: "images/12.png"
 },
 
 {
@@ -98,6 +110,7 @@ id:13,
 title:"Climate Action",
 description:"Penanganan perubahan iklim.",
 color:"#3F7E44"
+icon: "images/13.png"
 },
 
 {
@@ -105,6 +118,7 @@ id:14,
 title:"Life Below Water",
 description:"Menjaga kehidupan bawah laut.",
 color:"#0A97D9"
+icon: "images/14.png"
 },
 
 {
@@ -112,6 +126,7 @@ id:15,
 title:"Life On Land",
 description:"Menjaga kehidupan di darat.",
 color:"#56C02B"
+icon: "images/15.png"
 },
 
 {
@@ -119,6 +134,7 @@ id:16,
 title:"Peace Justice",
 description:"Perdamaian dan keadilan.",
 color:"#00689D"
+icon: "images/16.png"
 },
 
 {
@@ -126,6 +142,7 @@ id:17,
 title:"Partnership",
 description:"Kemitraan untuk mencapai tujuan.",
 color:"#19486A"
+icon: "images/17.png"
 }
 
 ];
