@@ -1,11 +1,12 @@
-// ==========================================
+// =========================================
 // SDGs BLOCK BUILDER
-// Version 1.0
-// ==========================================
+// Hidden Impact Indonesia
+// Version 2.0
+// =========================================
 
-// -------------------------------
+// ===============================
 // DATA SDGs
-// -------------------------------
+// ===============================
 
 const sdgs = [
 
@@ -13,332 +14,476 @@ const sdgs = [
 id:1,
 title:"No Poverty",
 description:"Mengakhiri kemiskinan dalam segala bentuk.",
-color:"#E5243B",
-icon: "images/01.png.jpg"
+icon:"images/01.png.jpg"
 },
 
 {
 id:2,
 title:"Zero Hunger",
 description:"Mengakhiri kelaparan dan meningkatkan gizi.",
-color:"#DDA63A",
-icon: "images/02.png.jpg"
+icon:"images/02.png.jpg"
 },
 
 {
 id:3,
 title:"Good Health",
-description:"Kehidupan sehat dan sejahtera.",
-color:"#4C9F38",
-icon: "images/03.png.jpg"
+description:"Menjamin kehidupan sehat dan sejahtera.",
+icon:"images/03.png.jpg"
 },
 
 {
 id:4,
 title:"Quality Education",
 description:"Pendidikan berkualitas untuk semua.",
-color:"#C5192D",
-icon: "images/04.png.jpg"
+icon:"images/04.png.jpg"
 },
 
 {
 id:5,
 title:"Gender Equality",
 description:"Kesetaraan gender.",
-color:"#FF3A21",
-icon: "images/05.png.jpg"
+icon:"images/05.png.jpg"
 },
 
 {
 id:6,
 title:"Clean Water",
 description:"Air bersih dan sanitasi.",
-color:"#26BDE2",
-icon: "images/06.png.jpg"
+icon:"images/06.png.jpg"
 },
 
 {
 id:7,
-title:"Clean Energy",
+title:"Affordable Clean Energy",
 description:"Energi bersih dan terjangkau.",
-color:"#FCC30B",
-icon: "images/07.png.jpg"
+icon:"images/07.png.jpg"
 },
 
 {
 id:8,
 title:"Decent Work",
 description:"Pekerjaan layak dan pertumbuhan ekonomi.",
-color:"#A21942",
-icon: "images/08.png.jpg"
+icon:"images/08.png.jpg"
 },
 
 {
 id:9,
 title:"Industry Innovation",
 description:"Inovasi dan infrastruktur.",
-color:"#FD6925",
-icon: "images/09.png.jpg"
+icon:"images/09.png.jpg"
 },
 
 {
 id:10,
 title:"Reduced Inequalities",
 description:"Mengurangi kesenjangan.",
-color:"#DD1367",
-icon: "images/10.png.jpg"
+icon:"images/10.png.jpg"
 },
 
 {
 id:11,
 title:"Sustainable Cities",
-description:"Kota dan komunitas berkelanjutan.",
-color:"#FD9D24",
-icon: "images/11.png.jpg"
+description:"Kota dan permukiman berkelanjutan.",
+icon:"images/11.png.jpg"
 },
 
 {
 id:12,
 title:"Responsible Consumption",
-description:"Konsumsi dan produksi bertanggung jawab.",
-color:"#BF8B2E",
-icon: "images/12.png.jpg"
+description:"Konsumsi dan produksi yang bertanggung jawab.",
+icon:"images/12.png.jpg"
 },
 
 {
 id:13,
 title:"Climate Action",
 description:"Penanganan perubahan iklim.",
-color:"#3F7E44",
-icon: "images/13.png.jpg"
+icon:"images/13.png.jpg"
 },
 
 {
 id:14,
 title:"Life Below Water",
-description:"Menjaga kehidupan bawah laut.",
-color:"#0A97D9",
-icon: "images/14.png.jpg"
+description:"Menjaga ekosistem laut.",
+icon:"images/14.png.jpg"
 },
 
 {
 id:15,
 title:"Life On Land",
-description:"Menjaga kehidupan di darat.",
-color:"#56C02B",
-icon: "images/15.png.jpg"
+description:"Menjaga ekosistem daratan.",
+icon:"images/15.png.jpg"
 },
 
 {
 id:16,
-title:"Peace Justice",
+title:"Peace, Justice",
 description:"Perdamaian dan keadilan.",
-color:"#00689D",
-icon: "images/16.png.jpg"
+icon:"images/16.png.jpg"
 },
 
 {
 id:17,
-title:"Partnership",
+title:"Partnerships",
 description:"Kemitraan untuk mencapai tujuan.",
-color:"#19486A",
-icon: "images/17.png.jpg"
+icon:"images/17.png.jpg"
 }
 
 ];
 
-// ==========================================
+// ===============================
+// MENGAMBIL ELEMEN HTML
+// ===============================
 
 const board=document.getElementById("board");
 const pieces=document.getElementById("pieces");
 
 const score=document.getElementById("score");
-const placed=document.getElementById("placed");
+const timer=document.getElementById("timer");
 
-const progress=document.getElementById("progressFill");
+const placed=document.getElementById("placed");
+const placedProgress=document.getElementById("placedProgress");
+
+const progressFill=document.getElementById("progressFill");
 
 const popup=document.getElementById("popup");
 const popupTitle=document.getElementById("popupTitle");
 const popupDescription=document.getElementById("popupDescription");
-
-const closePopup=document.getElementById("closePopup");
+const popupImage=document.getElementById("popupImage");
 
 const winner=document.getElementById("winner");
 
-const resetBtn=document.getElementById("resetBtn");
+const finalScore=document.getElementById("finalScore");
+const finalTime=document.getElementById("finalTime");
 
+const resetBtn=document.getElementById("resetBtn");
 const playAgain=document.getElementById("playAgain");
 
-// ==========================================
+const closePopup=document.getElementById("closePopup");
+const popupNext=document.getElementById("popupNext");
 
-let totalPlaced=0;
+const closeWinner=document.getElementById("closeWinner");
 
-let currentScore=0;
+// ===============================
+// VARIABEL GAME
+// ===============================
+
+let scoreValue=0;
+
+let placedValue=0;
 
 let dragItem=null;
 
-// ==========================================
-// TIMER
-// ==========================================
-
 let seconds=0;
 
-const timer=document.getElementById("timer");
+let timerInterval=null;
 
-setInterval(()=>{
+// ===============================
+// TIMER
+// ===============================
 
-seconds++;
+function startTimer(){
 
-let m=Math.floor(seconds/60);
+    if(timerInterval) return;
 
-let s=seconds%60;
+    timerInterval = setInterval(()=>{
 
-timer.innerHTML=
+        seconds++;
 
-String(m).padStart(2,"0")+
+        const minute = Math.floor(seconds/60);
+        const second = seconds%60;
 
-":"+
+        timer.textContent =
+        String(minute).padStart(2,"0")
+        +":"
+        +String(second).padStart(2,"0");
 
-String(s).padStart(2,"0");
+    },1000);
 
-},1000);
+}
 
-// ==========================================
+// ===============================
 // SHUFFLE
-// ==========================================
+// ===============================
 
-let blocks=[...sdgs];
+function shuffle(array){
 
-blocks.sort(()=>Math.random()-0.5);
+    for(let i=array.length-1;i>0;i--){
 
-// ==========================================
-// MEMBUAT SLOT PIRAMIDA
-// ==========================================
+        const j=Math.floor(Math.random()*(i+1));
 
-for(let i=1;i<=17;i++){
+        [array[i],array[j]]=[array[j],array[i]];
 
-const slot=document.createElement("div");
-
-slot.className="slot";
-
-slot.dataset.id=i;
-
-slot.innerHTML=`<span>${i}</span>`;
-
-board.appendChild(slot);
+    }
 
 }
 
-// ==========================================
+// ===============================
+// MEMBUAT BOARD
+// ===============================
+
+function createBoard(){
+
+    board.innerHTML="";
+
+    for(let i=1;i<=17;i++){
+
+        const slot=document.createElement("div");
+
+        slot.className="slot";
+
+        slot.dataset.id=i;
+
+        slot.innerHTML="<span>"+i+"</span>";
+
+        slot.addEventListener("dragover",(e)=>{
+
+            e.preventDefault();
+
+        });
+
+        slot.addEventListener("drop",dropBlock);
+
+        board.appendChild(slot);
+
+    }
+
+}
+
+// ===============================
 // MEMBUAT BALOK
-// ==========================================
+// ===============================
 
-blocks.forEach(item=>{
+function createPieces(){
 
-const block=document.createElement("div");
+    pieces.innerHTML="";
 
-block.className="block";
+    const data=[...sdgs];
 
-block.draggable=true;
+    shuffle(data);
 
-block.dataset.id=item.id;
+    data.forEach(item=>{
 
-block.style.background=item.color;
+        const block=document.createElement("div");
 
-block.innerHTML = `
-    <img src="${item.icon}" alt="${item.title}">
-`;
+        block.className="block";
 
-pieces.appendChild(block);
+        block.draggable=true;
 
-});
+        block.dataset.id=item.id;
 
-// ==========================================
-// DRAG START
-// ==========================================
+        block.innerHTML=`
 
-document.querySelectorAll(".block").forEach(block=>{
+            <img src="${item.icon}" alt="${item.title}">
 
-block.addEventListener("dragstart",()=>{
+        `;
 
-dragItem=block;
+        block.addEventListener("dragstart",()=>{
 
-});
+            dragItem=block;
 
-});
+            startTimer();
 
-// ==========================================
+        });
+
+        pieces.appendChild(block);
+
+    });
+
+}
+
+// ===============================
 // DROP
-// ==========================================
+// ===============================
 
-document.querySelectorAll(".slot").forEach(slot=>{
+function dropBlock(){
 
-slot.addEventListener("dragover",(e)=>{
+    if(!dragItem) return;
 
-e.preventDefault();
+    if(this.dataset.id!==dragItem.dataset.id){
+
+        this.animate(
+
+            [
+
+                {transform:"translateX(-8px)"},
+
+                {transform:"translateX(8px)"},
+
+                {transform:"translateX(0)"}
+
+            ],
+
+            {
+
+                duration:250
+
+            }
+
+        );
+
+        return;
+
+    }
+
+    if(this.children.length>1){
+
+        return;
+
+    }
+
+    this.innerHTML="";
+
+    this.appendChild(dragItem);
+
+    dragItem.draggable=false;
+
+    placedValue++;
+
+    scoreValue+=10;
+
+    score.textContent=scoreValue;
+
+    placed.textContent=placedValue;
+
+    if(placedProgress){
+
+        placedProgress.textContent=placedValue;
+
+    }
+
+    progressFill.style.width=(placedValue/17*100)+"%";
+
+    showPopup(Number(dragItem.dataset.id));
+
+    if(placedValue===17){
+
+        showWinner();
+
+    }
+
+}
+
+// ===============================
+// POPUP SDGs
+// ===============================
+
+function showPopup(id){
+
+    const data = sdgs.find(item=>item.id===id);
+
+    if(!data) return;
+
+    popupImage.src = data.icon;
+    popupTitle.textContent = data.title;
+    popupDescription.textContent = data.description;
+
+    popup.style.display = "flex";
+
+}
+
+// ===============================
+// TUTUP POPUP
+// ===============================
+
+closePopup.addEventListener("click",()=>{
+
+    popup.style.display="none";
 
 });
 
-slot.addEventListener("drop",()=>{
+popupNext.addEventListener("click",()=>{
 
-if(slot.dataset.id===dragItem.dataset.id){
-
-slot.appendChild(dragItem);
-
-dragItem.draggable=false;
-
-totalPlaced++;
-
-currentScore+=10;
-
-score.innerHTML=currentScore;
-
-placed.innerHTML=totalPlaced;
-
-progress.style.width=(totalPlaced/17*100)+"%";
-
-let data=sdgs.find(x=>x.id==dragItem.dataset.id);
-
-popup.style.display="flex";
-
-popupTitle.innerHTML=data.title;
-
-popupDescription.innerHTML=data.description;
-
-if(totalPlaced===17){
-
-winner.style.display="flex";
-
-}
-
-}
+    popup.style.display="none";
 
 });
 
+// ===============================
+// POPUP PEMENANG
+// ===============================
+
+function showWinner(){
+
+    clearInterval(timerInterval);
+
+    finalScore.textContent = scoreValue;
+
+    finalTime.textContent = timer.textContent;
+
+    winner.style.display="flex";
+
+}
+
+// ===============================
+// TUTUP POPUP PEMENANG
+// ===============================
+
+closeWinner.addEventListener("click",()=>{
+
+    winner.style.display="none";
+
 });
 
-// ==========================================
-// CLOSE POPUP
-// ==========================================
+// ===============================
+// RESET GAME
+// ===============================
 
-closePopup.onclick=function(){
+function resetGame(){
 
-popup.style.display="none";
+    clearInterval(timerInterval);
+
+    timerInterval=null;
+
+    seconds=0;
+
+    timer.textContent="00:00";
+
+    scoreValue=0;
+
+    placedValue=0;
+
+    score.textContent="0";
+
+    placed.textContent="0";
+
+    if(placedProgress){
+
+        placedProgress.textContent="0";
+
+    }
+
+    progressFill.style.width="0%";
+
+    popup.style.display="none";
+
+    winner.style.display="none";
+
+    dragItem=null;
+
+    createBoard();
+
+    createPieces();
 
 }
 
-// ==========================================
-// RESET
-// ==========================================
+// ===============================
+// TOMBOL MAIN LAGI
+// ===============================
 
-resetBtn.onclick=function(){
+playAgain.addEventListener("click",()=>{
 
-location.reload();
+    resetGame();
 
-}
+});
 
-playAgain.onclick=function(){
+resetBtn.addEventListener("click",()=>{
 
-location.reload();
+    resetGame();
 
-}
+});
+
+// ===============================
+// MULAI GAME
+// ===============================
+
+resetGame();
