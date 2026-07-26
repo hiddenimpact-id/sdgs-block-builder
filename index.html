@@ -1,32 +1,325 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>SDGs Block Builder</title>
+    <title>SDGs Block Builder</title>
 
-<link rel="stylesheet" href="style.css">
+    <meta name="description"
+        content="Permainan edukasi menyusun 17 balok Sustainable Development Goals (SDGs) untuk anak.">
 
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
 
-<h1>🌍 SDGs Block Builder</h1>
+    <!-- ================= HEADER ================= -->
 
-<p>Susun balok SDGs ke posisi yang benar!</p>
+    <header class="header">
 
-<div class="game">
+        <div class="logo">
 
-    <div id="board"></div>
+            🌍
 
-    <div id="pieces"></div>
+            <div>
 
-</div>
+                <h1>SDGs Block Builder</h1>
 
-<p id="status"></p>
+                <span>Build The Future Together</span>
 
-<script src="script.js"></script>
+            </div>
+
+        </div>
+
+        <button id="resetBtn">
+
+            🔄 Main Lagi
+
+        </button>
+
+    </header>
+
+    <!-- ================= HERO ================= -->
+
+    <section class="hero">
+
+        <div class="hero-text">
+
+            <h2>
+
+                Susun 17 Balok SDGs Menjadi Piramida
+
+            </h2>
+
+            <p>
+
+                Drag setiap balok ke posisi yang benar.
+                Setelah selesai kamu akan mendapatkan
+                sertifikat sebagai SDGs Builder!
+
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- ================= DASHBOARD ================= -->
+
+    <section class="dashboard">
+
+        <div class="card">
+
+            <h3>⭐ Skor</h3>
+
+            <h1 id="score">
+
+                0
+
+            </h1>
+
+        </div>
+
+        <div class="card">
+
+            <h3>⏱️ Waktu</h3>
+
+            <h1 id="timer">
+
+                00:00
+
+            </h1>
+
+        </div>
+
+        <div class="card">
+
+            <h3>🧩 Balok Terpasang</h3>
+
+            <h1>
+
+                <span id="placed">
+
+                    0
+
+                </span>
+
+                /17
+
+            </h1>
+
+        </div>
+
+    </section>
+
+    <!-- ================= PETUNJUK ================= -->
+
+    <section class="guide">
+
+        <h2>Cara Bermain</h2>
+
+        <div class="guide-list">
+
+            <div class="guide-item">
+
+                🧱
+
+                <p>Seret balok SDGs.</p>
+
+            </div>
+
+            <div class="guide-item">
+
+                🎯
+
+                <p>Letakkan pada posisi yang tepat.</p>
+
+            </div>
+
+            <div class="guide-item">
+
+                🌎
+
+                <p>Selesaikan seluruh 17 tujuan.</p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ================= GAME ================= -->
+
+    <main class="game-container">
+
+        <!-- AREA PIRAMIDA -->
+
+        <section class="board-section">
+
+            <h2>
+
+                Piramida SDGs
+
+            </h2>
+
+            <div id="board">
+
+                <!-- Akan diisi JavaScript -->
+
+            </div>
+
+        </section>
+
+        <!-- AREA BALOK -->
+
+        <aside class="pieces-section">
+
+            <h2>
+
+                Balok SDGs
+
+            </h2>
+
+            <div id="pieces">
+
+                <!-- Akan dibuat JavaScript -->
+
+            </div>
+
+        </aside>
+
+    </main>
+
+    <!-- ================= PROGRESS ================= -->
+
+    <section class="progress-section">
+
+        <h2>
+
+            Progress
+
+        </h2>
+
+        <div class="progress-bar">
+
+            <div id="progressFill"></div>
+
+        </div>
+
+    </section>
+
+    <!-- ================= INFO SDGS ================= -->
+
+    <section class="info">
+
+        <h2>
+
+            Tentang SDGs
+
+        </h2>
+
+        <p>
+
+            Sustainable Development Goals (SDGs)
+            merupakan 17 tujuan pembangunan
+            berkelanjutan yang disusun oleh
+            Perserikatan Bangsa-Bangsa (PBB)
+            untuk menciptakan dunia yang lebih baik,
+            lebih adil,
+            sehat,
+            dan berkelanjutan.
+
+        </p>
+
+    </section>
+
+    <!-- ================= POPUP ================= -->
+
+    <div id="popup" class="popup">
+
+        <div class="popup-content">
+
+            <button id="closePopup">
+
+                ✖
+
+            </button>
+
+            <img id="popupImage" src="" alt="">
+
+            <h2 id="popupTitle">
+
+                SDG
+
+            </h2>
+
+            <p id="popupDescription">
+
+                Penjelasan SDGs akan muncul di sini.
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- ================= WIN SCREEN ================= -->
+
+    <div id="winner" class="winner">
+
+        <div class="winner-box">
+
+            <h1>
+
+                🎉 SELAMAT 🎉
+
+            </h1>
+
+            <p>
+
+                Kamu berhasil menyusun
+                seluruh 17 tujuan SDGs.
+
+            </p>
+
+            <button id="playAgain">
+
+                Main Lagi
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <p>
+
+            © 2026 SDGs Block Builder
+
+        </p>
+
+        <p>
+
+            Educational Game for Children
+
+        </p>
+
+    </footer>
+
+    <script src="script.js"></script>
 
 </body>
+
 </html>
