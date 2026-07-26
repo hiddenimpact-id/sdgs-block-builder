@@ -243,7 +243,9 @@ block.dataset.id=item.id;
 
 block.style.background=item.color;
 
-block.innerHTML=item.id;
+block.innerHTML = `
+    <img src="${item.icon}" alt="${item.title}">
+`;
 
 pieces.appendChild(block);
 
