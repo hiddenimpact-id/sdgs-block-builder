@@ -354,42 +354,45 @@ menyusun balok secara interaktif.
 
 <!-- ===== LANJUT KE BAGIAN 2 ===== -->
 
-<!-- ========================= -->
-<!-- POPUP SDGs -->
-<!-- ========================= -->
+<!-- ================= POPUP SDG ================= -->
 
 <div id="popup" class="popup">
 
     <div class="popup-content">
 
-        <button id="closePopup" class="close-btn">
-
+        <button id="closePopup">
             ✖
-
         </button>
 
-        <div class="popup-image">
+        <img id="popupImage" src="" alt="SDG Icon">
 
-            <img
-                id="popupImage"
-                src=""
-                alt="SDGs">
+        <h2 id="popupTitle">
+            SDG
+        </h2>
+
+        <p id="popupDescription"></p>
+
+        <hr>
+
+        <h3>🌍 Contoh di Kehidupan</h3>
+
+        <ul id="popupExamples">
+        </ul>
+
+        <h3>💚 Yang Bisa Kamu Lakukan</h3>
+
+        <ul id="popupActions">
+        </ul>
+
+        <div class="funfact">
+
+            <h3>✨ Fakta Menarik</h3>
+
+            <p id="popupFact"></p>
 
         </div>
 
-        <h2 id="popupTitle">
-
-            Sustainable Development Goals
-
-        </h2>
-
-        <p id="popupDescription">
-
-            Penjelasan SDGs akan muncul di sini.
-
-        </p>
-
-        <button id="popupNext">
+        <button id="continueBtn">
 
             Lanjut Bermain
 
@@ -398,7 +401,7 @@ menyusun balok secara interaktif.
     </div>
 
 </div>
-
+    
 <!-- ========================= -->
 <!-- POPUP PEMENANG -->
 <!-- ========================= -->
