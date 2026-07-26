@@ -223,6 +223,8 @@ slot.className="slot";
 
 slot.dataset.id=i;
 
+slot.innerHTML=`<span>${i}</span>`;
+
 board.appendChild(slot);
 
 }
